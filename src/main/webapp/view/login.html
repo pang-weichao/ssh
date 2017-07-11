@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<form>
+    <span>用户名:</span><input style="width: 100px" id="name"/>
+    <span>密码:</span><input style="width: 100px" id="password"/>
+    <a type="submit" onclick="$.sub()">登陆</a>
+</form>
+<script src="/assets/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.sub = function () {
+            $.ajax({
+                url: "http://localhost:8080/user/login",
+                type : 'post',
+                dataType : 'json',
+                data: {
+                    "name" : $("#name").val(),
+                    "password" : $("#password").val(),
+                },
+                success: function(msg) {
+                    console.log(msg);
+                    if(msg.result == "ok"){
+                        sessionStorage.setItem("userId",msg.data);
+                        window.location.href="/view/hello.html";
+                    }
+                    else alert("用户名或者密码错误");
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+    });
+</script>
+</body>
+</html>
