@@ -1,2 +1,2 @@
 # ssh
-spring spring-mvc mybatis的简单实践
+spring spring-mvc hibernate的简单实践
